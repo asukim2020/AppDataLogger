@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="@string/save_title"
+            android:textColor="@color/font"
+            android:gravity="center"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/button_switch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="35"
+            android:theme="@style/SwitchButtonStyle"
+            android:checked="true"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="@string/save_file_name_input"
+            android:textColor="@color/font"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/tv_edit"
+            android:inputType="textPersonName"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="45"
+            android:background="@drawable/shape_edit_text_border"
+            android:gravity="center"
+            android:hint="@string/edit_text_placeholder"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:textColor="@color/font"
+            android:textColorHint="@color/lightFont"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/folder_layout"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:clickable="false"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:text="@string/select_folder"
+            android:textColor="@color/font" />
+
+        <ImageButton
+            android:id="@+id/img_folder"
+            android:clickable="false"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_folder_white_24"
+            android:tint="@color/colorAccentImage"/>
+        <TextView
+            android:clickable="false"
+            android:id="@+id/tv_folder"
+            android:layout_width="0dp"
+            android:paddingStart="8dp"
+            android:layout_height="match_parent"
+            android:layout_weight="35"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/app_title"
+            android:textColor="@color/font"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="42.5"
+            android:text="@string/cancel"
+            android:backgroundTint="@color/separator"
+            android:textColor="@color/font"
+            android:layout_gravity="center" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="42.5"
+            android:text="@string/ok"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/font"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</LinearLayout>

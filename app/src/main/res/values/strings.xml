@@ -1,0 +1,202 @@
+<resources>
+    <string name="app_name">GreenTech</string>
+    <string name="app_title">GreenTech</string>
+
+    <!-- 얼럿 버튼 -->
+    <string name="close">닫기</string>
+    <string name="ok">확인</string>
+    <string name="end">종료</string>
+    <string name="cancel">취소</string>
+    <string name="cancel2">취소</string>
+    <string name="delete">삭제</string>
+    <string name="copy">복사</string>
+    <string name="move">이동</string>
+    <string name="select">선택</string>
+    <string name="edit">수정</string>
+    <string name="name_edit">이름 수정</string>
+    <string name="shard">공유</string>
+    <string name="save">저장</string>
+    <string name="overwrite">덮어쓰기</string>
+    <string name="paste">붙여넣기</string>
+    <string name="retry">다시 시도</string>
+    <string name="show">보이기</string>
+    <string name="hide">숨기기</string>
+    <string name="free">영점제거</string>
+    <string name="append_measure">이어 측정</string>
+
+    <string name="delete_msg">삭제하시겠습니까?</string>
+    <string name="end_msg">종료하시겠습니까?</string>
+
+    <string name="color_choose">컬러 선택</string>
+
+    <!-- 측정 -->
+    <string name="measure">측정</string>
+    <string name="measure_start">측정 시작</string>
+    <string name="measure_end_msg">측정을 종료하시겠습니까?</string>
+    <string name="measure_append_msg">이어서 측정하시겠습니까?</string>
+    <string name="measure_step_end_msg">스텝측정이 종료되었습니다. 이어서 측정하시겠습니까?</string>
+    <string name="measure_step_not_found_msg">설정된 스텝이 없습니다. 스텝 설정 후 측정해 주세요.</string>
+    <string name="measure_msg">블루투스 기기 연결 후 데이터를 측정합니다.</string>
+    <string name="select_zero_point">영점 선택</string>
+    <string name="setting_x_axis">그래프 X 축 설정</string>
+    <string name="setting_y_axis">그래프 Y 축 설정</string>
+    <string name="select_channel_to_measure">측정할 채널 선택</string>
+    <string name="all_input_mas">모두 입력해주세요</string>
+    <string name="min_max_exception_msg">최솟값이 최댓값보다 클 수 없습니다.</string>
+    <string name="cancel_all">전체해제</string>
+    <string name="select_channel_to_measure_over_count_msg">최대 [설정된 채널 개수] %s개 까지 선택 가능합니다.</string>
+    <string name="input_step_p_msg">STEP P 를 입력해주세요.</string>
+    <string name="all_zero_point_msg">전체 영점 지정을 하시겠습니까?</string>
+    <string name="all_release_zero_point_msg">전체 영점 해제를 하시겠습니까?</string>
+    <string name="file_char_exception_msg">파일 이름에는 일부 특수문자를 사용할 수 없습니다.</string>
+    <string name="input_a_value">a 값 입력</string>
+
+
+
+    <string name="channel_1">한 칸</string>
+    <string name="channel_2">두 칸</string>
+    <string name="channel_4">네 칸</string>
+    <string name="channel_8">여덟 칸</string>
+
+
+    <!-- 그래프 리뷰 -->
+    <string name="graph_review">그래프 리뷰</string>
+    <string name="loading">로딩중…</string>
+    <string name="select_file">파일 선택</string>
+    <string name="edit_name">이름 수정</string>
+    <string name="create_folder">폴더 생성</string>
+    <string name="filter_graph">그래프 필터</string>
+    <string name="graph_review_msg">측정 시 저장된 파일로 그래프를 리뷰합니다.</string>
+    <string name="save_file_not_found_msg">저장된 파일이 없습니다.</string>
+    <string name="file_delete_fail_msg">파일 삭제에 실패하였습니다.</string>
+    <string name="create_dir_fail_msg">폴더 생성에 실패하였습니다.</string>
+    <string name="not_shared_folder">폴더는 공유할 수 없습니다.</string>
+    <string name="file_shared_fail">공유 할 수 있는 어플이 없습니다.</string>
+    <string name="download_alert_title">그래프를 [기존 파일명.jpg]로 저장하시겠습니까?</string>
+    <string name="download_success_msg">저장 완료</string>
+    <string name="save_to_gallery_fail_msg">이미 파일이 존재합니다. 덮어쓰시겠습니까?</string>
+
+
+    <!-- 채널 설정 -->
+    <string name="channel_setting">채널 설정</string>
+    <string name="channel_list">채널 목록</string>
+    <string name="channel_setting_msg">채널 정보를 설정합니다.</string>
+    <string name="order">순서</string>
+    <string name="channel_name">채널명</string>
+    <string name="channel_is_on">채널 사용</string>
+
+    <string name="name">이름</string>
+    <string name="sensor_type">센서 종류</string>
+    <string name="decimal_point">소수점 자리</string>
+    <string name="select_unit">단위 선택</string>
+    <string name="input_unit">단위 입력</string>
+    <string name="filter">필터</string>
+    <string name="line_color">선 색상</string>
+    <string name="not_decimal_point">소수점 없음</string>
+    <string name="decimal_point_1">한자리</string>
+    <string name="decimal_point_2">두자리</string>
+    <string name="decimal_point_3">세자리</string>
+    <string name="direct_input">직접입력</string>
+
+    <string name="ch_1">1채널</string>
+    <string name="ch_2">2채널</string>
+    <string name="ch_4">4채널</string>
+    <string name="ch_8">8채널</string>
+    <string name="ch_16">16채널</string>
+    <string name="ch_32">32채널</string>
+    <string name="ch_64">64채널</string>
+
+    <string name="all_setting">다른 채널에 적용</string>
+    <string name="all_select">전체선택</string>
+
+
+    <!-- 저장 설정 -->
+    <string name="select_save_type">측정방식 선택</string>
+    <string name="select_zero_point_type">영점지정 방식 선택</string>
+    <string name="measure_speed">측정 배속</string>
+    <string name="graph_channel_count">그래프 채널 개수</string>
+    <string name="select_grid_type">그래프 격자 종류</string>
+    <string name="line">선</string>
+    <string name="dot">점</string>
+    <string name="graph_line_type">그래프 선 종류</string>
+    <string name="linear">직선</string>
+    <string name="cubic_bezier">곡선</string>
+    <string name="step_graph_interval">스텝 그래프 저장 간격</string>
+    <string name="visible_measure_text">측정 시간 표기</string>
+    <string name="always_draw">항상 표기</string>
+    <string name="draw_save_timing">파일 저장 시 표기</string>
+    <string name="equal_interval_time_msg">등간격 시간을 설정합니다.</string>
+    <string name="step_time_msg">스텝간격 시간을 설정합니다.</string>
+    <string name="select_using_step">사용할 스텝 선택</string>
+    <string name="step_setting">Step 설정</string>
+    <string name="step_setting_number">STEP NO.%s 설정</string>
+    <string name="step_number">STEP NO.%s</string>
+    <string name="step_count">%s 단계</string>
+    <string name="input_save_interval">저장 간격 입력(초)</string>
+    <string name="save_equal_interval_setting">등간격 저장 설정</string>
+    <string name="save_equal_interval">등간격 저장</string>
+    <string name="save_step_setting">스텝 저장 설정</string>
+    <string name="save_step">스텝 저장</string>
+    <string name="save_step_list">스텝 저장 목록</string>
+    <string name="save_step_exception_msg">이전 스텝 값이 다음 스텝 값 보다 클 수 없습니다.</string>
+    <string name="select_step_msg">스텝을 선택해주세요.</string>
+    <string name="graph_buffer_size">그래프 버퍼 크기</string>
+    <string name="graph_buffer_size_limit_msg">버퍼크기는 최대 5000까지 가능합니다.</string>
+    <string name="graph_buffer_size_least_msg">버퍼크기는 최소 100까지 가능합니다.</string>
+    <string name="step_header">데이터가 입력된 시간에 측정됩니다.</string>
+    <string name="sum_header">입력된 채널의 합을 측정합니다.</string>
+    <string name="avg_header">입력된 채널의 평균을 측정합니다.</string>
+
+
+    <!-- 데이터 로거 설정 -->
+    <string name="data_log_setting">데이터 로거 설정</string>
+    <string name="data_log_setting_msg">데이터 로거를 설정합니다.</string>
+
+
+    <!-- 유틸 관련 -->
+    <string name="input_minute">분 단위 입력</string>
+
+    <!-- 파일 관련 -->
+    <string name="save_setting">저장 설정</string>
+    <string name="save_current_position">이 위치에 저장</string>
+    <string name="save_title">파일 저장 사용</string>
+    <string name="select_folder">폴더 선택</string>
+    <string name="save_file_name_input">파일명</string>
+    <string name="save_file_name_input_msg">파일명을 입력해주세요.</string>
+    <string name="save_folder_name_input_msg">폴더명을 입력해주세요.</string>
+    <string name="save_file_name_overwrite">%s이(가) 이미 있습니다. 덮어쓰시겠습니까?</string>
+    <string name="save_setting_msg">측정 시 저장 간격을 설정합니다.</string>
+    <string name="change_success_msg">변경 성공</string>
+    <string name="change_fail_msg">변경 실패</string>
+    <string name="copy_success_msg">복사 성공</string>
+    <string name="copy_fail_msg">복사 실패</string>
+    <string name="move_success_msg">이동 성공</string>
+    <string name="move_fail_msg">이동 실패</string>
+    <string name="overwrite_success_msg">덮어쓰기 성공</string>
+    <string name="overwrite_fail_msg">덮어쓰기 실패</string>
+    <string name="delete_success_msg">삭제 성공</string>
+    <string name="delete_fail_msg">삭제 실패</string>
+    <string name="overwrite_exception_msg">중복파일이 존재합니다. 덮어쓰시겠습니까?</string>
+    <string name="empty_file_msg">빈 파일입니다.</string>
+    <string name="file_list_count_label">%s개 항목</string>
+
+    <!-- 기타 설정 -->
+    <string name="setting">설정</string>
+    <string name="setting_msg">나머지 기능을 설정합니다.</string>
+    <string name="max_count_limit_msg">최대 [설정된 채널 개수] %s개 까지 저장 가능합니다.</string>
+    <string name="zero_point_all">전체 영점</string>
+    <string name="zero_point_some">개별 영점</string>
+
+    <!-- 블루투스 관련 -->
+    <string name="bluetooth_settings">블루투스 설정</string>
+    <string name="bluetooth_devices">블루투스 기기 목록</string>
+    <string name="bluetooth_not_available">블루투스가 지원되지 않는 기기입니다.</string>
+    <string name="bluetooth_not_connect">블루투스 연결 후 이용해 주세요.</string>
+    <string name="bluetooth_connect_fail">"블루투스 연결에 실패하였습니다."</string>
+    <string name="bluetooth_devices_not_exist">연결된 블루투스 기기가 없습니다.\n 블루투스 연결 후 이용해 주세요.</string>
+    <string name="bluetooth_disconnected">블루투스 연결이 해제되었습니다..</string>
+    <string name="bluetooth_connecting_msg">연결중…</string>
+    <string name="edit_text_placeholder">입력해주세요.</string>
+    <string name="edit_text_placeholder_short">입력</string>
+
+</resources>

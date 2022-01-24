@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+
+        <item name="android:textColorPrimary">@color/font</item>
+        <item name="android:itemBackground">@color/itemBackground</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/font</item>
+        <item name="android:alertDialogTheme">@style/lightDialog</item>
+        <item name="actionOverflowButtonStyle">@style/menuTheme</item>
+        <item name="android:fontFamily">@font/questrial_regular</item>
+    </style>
+
+    <style name="lightDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
+    <style name="SwitchButtonStyle" parent="AppTheme">
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorSwitchThumbNormal">@color/separator</item>
+        <item name="android:colorForeground">@color/lightFont</item>
+    </style>
+
+    <style name="menuTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/itemBackground</item>
+    </style>
+
+</resources>

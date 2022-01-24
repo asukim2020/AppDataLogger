@@ -1,0 +1,83 @@
+plugins {
+    // basic apply
+    id 'com.android.application'
+    id 'kotlin-android'
+
+    // add realm
+    id 'kotlin-kapt'
+    id 'realm-android'
+
+    // add Firebase SDK
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "kr.co.greentech.dataloggerapp"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 19
+        versionName "1.0.15"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            ext.alwaysUpdateBuildId = false
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // basic dependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Chart 라이브러리 - MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Color Picker
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
+
+    // 리사이클러 뷰
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // 코루틴
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+
+    // rxjava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation "io.reactivex.rxjava3:rxjava:3.0.8"
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
+    // Firebase SDK
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Event Bus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+}

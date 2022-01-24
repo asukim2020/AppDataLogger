@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "203900121661",
+    "project_id": "data-logger-26fca",
+    "storage_bucket": "data-logger-26fca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203900121661:android:892294047f8498653ab054",
+        "android_client_info": {
+          "package_name": "kr.co.greentech.dataloggerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203900121661-79dmu0g53s9il2ia2ae4ovmjggtqdofr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.greentech.dataloggerapp",
+            "certificate_hash": "8d0d6fef49e49e42bf01025e26a31fe38a30a322"
+          }
+        },
+        {
+          "client_id": "203900121661-e91459ea6fbprn588v7623nf0ho2mnl2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwxezyScaIoSLiXJLCGTfOKvmqMyFBedw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203900121661-e91459ea6fbprn588v7623nf0ho2mnl2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

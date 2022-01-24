@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/itemBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/itemBackground"
+        android:visibility="invisible">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/time_chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title_left_axis"
+            app:layout_constraintEnd_toStartOf="@+id/title_right_axis"
+            app:layout_constraintBottom_toTopOf="@+id/title_x_axis" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/xy_chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title_left_axis"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/title_x_axis"/>
+
+        <kr.co.greentech.dataloggerapp.util.textview.VerticalTextView
+            android:id="@+id/title_left_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/font"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="5dp"
+            android:text="Left Axis"
+            android:textSize="14sp"
+            android:gravity="center" />
+
+        <kr.co.greentech.dataloggerapp.util.textview.VerticalTextView
+            android:id="@+id/title_right_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="5dp"
+            android:text="Right Axis"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/title_x_axis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="5dp"
+            android:text="Time (sec)"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <HorizontalScrollView
+            android:id="@+id/excel_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/excel_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/excel_top_layout"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminateDrawable="@drawable/progressbar_circle_mini"
+            android:indeterminateDuration="1000"
+            android:padding="50dp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="-23dp"></ProgressBar>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="40.7dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/separator_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/separator"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/menu_layout_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:background="@color/itemBackground"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageButton
+                android:id="@+id/download_portrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_archive_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/filter_portrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_filter_alt_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/change_portrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_escalator_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/setting_portrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings_white_24"
+                android:tint="@color/colorAccent" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_landscape"
+        android:layout_width="40.7dp"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:id="@+id/separator_landscape"
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:background="@color/separator"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/menu_layout_landscape"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100"
+            android:background="@color/itemBackground"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/download_landscape"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_archive_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/filter_landscape"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_filter_alt_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/change_landscape"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_escalator_white_24"
+                android:tint="@color/colorAccent" />
+
+            <ImageButton
+                android:id="@+id/setting_landscape"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="25"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings_white_24"
+                android:tint="@color/colorAccent" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
