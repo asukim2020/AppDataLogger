@@ -58,7 +58,7 @@ object BluetoothMeasureUIManager {
         )
 
         csvLayout.orientation = LinearLayout.HORIZONTAL
-
+        var count = 0
         for (idx in 0 .. excelItem.dataList.size + 1) {
             val tv = TextView(context)
             tv.setBackgroundResource(R.drawable.excel_border)
@@ -75,7 +75,12 @@ object BluetoothMeasureUIManager {
                 }
 
                 else -> {
-                    tv.text = "CH${idx - 1}"
+                    if (excelItem.elapsedTime == "") {
+                        tv.text = "CH${idx - 1}"
+                    } else {
+                        tv.text = excelItem.elapsedTime.split(",")[count]
+                        count++
+                    }
                     tv.setBackgroundResource(R.drawable.excel_header_border)
                 }
             }

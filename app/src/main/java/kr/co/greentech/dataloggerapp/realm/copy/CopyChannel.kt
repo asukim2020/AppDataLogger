@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class CopyChannel(
         val key: Long,
-        val name: String,
+        var name: String,
         var isOn: Boolean,
         val sensorType: Int,
         val decPoint: Int,

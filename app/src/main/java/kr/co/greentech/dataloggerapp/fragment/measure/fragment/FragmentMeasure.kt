@@ -1421,7 +1421,16 @@ class FragmentMeasure: Fragment() {
                 for (item in list) {
                     floatList.add(item)
                 }
-                val layout = BluetoothMeasureUIManager.getCSVHeaderLayout(requireContext(), ExcelItem(-1, tvTime.text.toString(), floatList, -1))
+
+                var channelNames = ""
+                for (idx in copyChannelList.indices) {
+                    if (idx > 0) {
+                        channelNames += ","
+                    }
+                    channelNames += copyChannelList[idx].name
+                }
+
+                val layout = BluetoothMeasureUIManager.getCSVHeaderLayout(requireContext(), ExcelItem(-1, channelNames, floatList, -1))
                 excelTopLayout.addView(layout)
                 chartChange(true)
             }

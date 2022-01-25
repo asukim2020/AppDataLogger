@@ -44,6 +44,9 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.File
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class FragmentGraphReview: Fragment() {
 
@@ -101,6 +104,7 @@ class FragmentGraphReview: Fragment() {
     private var interval: Long = -1L
     private var skipCount: Int = 0
     private var channelCount: Int = 0
+    private var channelNames: String = ""
     private lateinit var mode: SaveType
 
     private lateinit var copyChannelList: List<CopyChannel>
@@ -433,6 +437,7 @@ class FragmentGraphReview: Fragment() {
                 } else {
                     // header data extract
                     flag = splitList[idx].toFloatOrNull() != null
+                    checkChannelNames(readLine[line])
 
                     if (channelCount == 0) {
                         val string = splitList[idx].toLowerCase()
@@ -533,6 +538,7 @@ class FragmentGraphReview: Fragment() {
                         stepInterval = splitList[idx].toFloat()
                     }
                     appendFlag = flag
+                    checkChannelNames(readLine[line])
 
                     if (channelCount == 0) {
                         val string = splitList[idx].toLowerCase()
@@ -745,6 +751,7 @@ class FragmentGraphReview: Fragment() {
                 } else {
                     // header data extract
                     flag = splitList[idx].toFloatOrNull() != null
+                    checkChannelNames(readLine[readLineCount])
 
                     if (flag) {
                         val time = splitList[idx].toFloat().toLong()
@@ -779,7 +786,7 @@ class FragmentGraphReview: Fragment() {
                 floatList.add(0.0F)
             }
 
-            val layout = BluetoothMeasureUIManager.getCSVHeaderLayout(requireContext(), ExcelItem(-1, "", floatList, -1))
+            val layout = BluetoothMeasureUIManager.getCSVHeaderLayout(requireContext(), ExcelItem(-1, channelNames, floatList, -1))
             excelTopLayout.addView(layout)
         }
 
@@ -1068,6 +1075,33 @@ class FragmentGraphReview: Fragment() {
                 STEP -> {
                     drawStepGraph(readLine, copyChannelList)
                     drawStepXYGraph(readLine)
+                }
+            }
+        }
+    }
+
+    private fun checkChannelNames(string: String) {
+        if (string.toLowerCase(Locale.ROOT).contains("datetime")) {
+            if (channelCount >= 0 && channelNames == "") {
+                val split = string.split(",")
+                val subList =
+                    split.subList(split.size - channelCount, split.size)
+                var channelNames = ""
+                for (idx in subList.indices) {
+                    if (idx != 0) {
+                        channelNames += ","
+                    }
+                    channelNames += subList[idx]
+                }
+                this.channelNames = channelNames
+
+                try {
+                    val names = channelNames.split(",")
+                    for (idx in names.indices) {
+                        copyChannelList[idx].name = names[idx]
+                    }
+                } catch (e: Exception) {
+                    Log.d("Asu", e.localizedMessage)
                 }
             }
         }

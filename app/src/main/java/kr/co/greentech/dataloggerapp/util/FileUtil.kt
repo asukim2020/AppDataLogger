@@ -155,7 +155,7 @@ class FileUtil {
                 headerMsg.append("horizontal pressure force : , $stepp\n")
             }
 
-            headerMsg.append("DateTime , Elasped_Time(sec)" + getChannelString(count) + "\n")
+            headerMsg.append("DateTime , Elasped_Time(sec)" + getChannelString(channelList, count) + "\n")
 
             writeFile(fileName, headerMsg.toString(), false, path)
         }
@@ -164,7 +164,7 @@ class FileUtil {
             stepAppendFlag = false
             val headerMsg = StringBuilder("")
             headerMsg.append("horizontal pressure force : , $stepp\n")
-            headerMsg.append("DateTime , Elasped_Time(sec)" + getChannelString(count) + "\n")
+            headerMsg.append("DateTime , Elasped_Time(sec)" + getChannelString(channelList, count) + "\n")
             writeFile(fileName, headerMsg.toString(), true, path)
         }
 

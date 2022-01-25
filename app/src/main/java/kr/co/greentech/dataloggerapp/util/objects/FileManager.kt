@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Environment
 import android.widget.Toast
 import kr.co.greentech.dataloggerapp.R
+import kr.co.greentech.dataloggerapp.realm.copy.CopyChannel
 import kr.co.greentech.dataloggerapp.util.TextUtil
 import java.io.*
 import java.lang.Exception
@@ -144,10 +145,13 @@ object FileManager {
         return Date(now)
     }
 
-    fun getChannelString(count: Int): String {
+    fun getChannelString(
+        channelList: List<CopyChannel>,
+        count: Int
+    ): String {
         val chString = StringBuilder()
         for (i in 0 until count) {
-            chString.append(" , CH").append(i + 1)
+            chString.append(" , ${channelList[i].name}")
 
         }
         return chString.toString()
