@@ -11,6 +11,7 @@ import kr.co.greentech.dataloggerapp.fragment.channel.enums.ChannelSettingType.*
 import kr.co.greentech.dataloggerapp.fragment.channel.enums.ChannelSettingType.Companion.INPUT_TEXT
 import kr.co.greentech.dataloggerapp.fragment.channel.enums.ChannelSettingType.Companion.COLOR_PICKER
 import kr.co.greentech.dataloggerapp.fragment.channel.enums.ChannelSettingType.Companion.SPINNER
+import kr.co.greentech.dataloggerapp.fragment.channel.enums.SensorType
 import kr.co.greentech.dataloggerapp.fragment.channel.enums.UnitType
 import kr.co.greentech.dataloggerapp.fragment.channel.item.ChannelSettingItem
 import kr.co.greentech.dataloggerapp.fragment.channel.viewholder.ChannelViewHolder
@@ -110,7 +111,24 @@ class ChannelSettingAdapter(val fragment: Fragment, val item: RealmChannel) : Re
                 UNIT -> unit = item.selectItemPosition
                 UNIT_INPUT -> unitInput = item.editText
                 CAPACITY -> capacity =
-                        if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
+                        if (item.editText.toFloatOrNull() != null) {
+                            val capacity = item.editText.toFloat()
+                            when(SensorType.fromInt(type)) {
+                                SensorType.GAGE4_SENSOR,
+                                SensorType.LVDT_POT,
+                                SensorType.VOLT -> {
+
+                                    decPoint = when {
+                                        1000 <= capacity -> 0
+                                        100 <= capacity && capacity < 1000 -> 1
+                                        10 <= capacity && capacity < 100 -> 2
+                                        else -> 3
+                                    }
+                                }
+                            }
+                            capacity
+                        }
+                        else 0.0F
                 RO -> ro =
                         if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
                 GF -> gf =

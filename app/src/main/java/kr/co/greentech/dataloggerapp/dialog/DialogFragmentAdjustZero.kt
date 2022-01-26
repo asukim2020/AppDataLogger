@@ -56,9 +56,8 @@ class DialogFragmentAdjustZero: DialogFragment() {
         val freeBtn = view.findViewById<TextView>(R.id.free_button)
 
         val list = ArrayList<AdjustCheckBoxItem>()
-        val maxChannelCount = PreferenceManager.getInt(PreferenceKey.CHANNEL_COUNT)
 
-        for (i in 0 until maxChannelCount) {
+        for (i in zeroAdjustList.indices) {
             list.add(AdjustCheckBoxItem(false, zeroAdjustList[i]))
         }
 
@@ -119,10 +118,9 @@ class DialogFragmentAdjustZero: DialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        val maxChannelCount = PreferenceManager.getInt(PreferenceKey.CHANNEL_COUNT)
         val checkboxHeight = 45.0F
 
-        val height: Float = checkboxHeight.toFloat() * maxChannelCount + 32.0F + 40.0F + 40.0F
+        val height: Float = checkboxHeight.toFloat() * zeroAdjustList.size + 32.0F + 40.0F + 40.0F
 
         val windowManager = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = windowManager.defaultDisplay

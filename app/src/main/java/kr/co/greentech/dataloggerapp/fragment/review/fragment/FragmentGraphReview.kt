@@ -673,6 +673,7 @@ class FragmentGraphReview: Fragment() {
         }
 
         xyChartUtil.clearChart()
+        xyChartUtil.addInitPoint(false)
 
         var stepp = "0"
 
@@ -1107,5 +1108,4 @@ class FragmentGraphReview: Fragment() {
         }
     }
 }
-
 

@@ -131,7 +131,7 @@
     <string name="step_setting">Step 설정</string>
     <string name="step_setting_number">STEP NO.%s 설정</string>
     <string name="step_number">STEP NO.%s</string>
-    <string name="step_count">%s 단계</string>
+    <string name="step_count">%s 단계(분)</string>
     <string name="input_save_interval">저장 간격 입력(초)</string>
     <string name="save_equal_interval_setting">등간격 저장 설정</string>
     <string name="save_equal_interval">등간격 저장</string>

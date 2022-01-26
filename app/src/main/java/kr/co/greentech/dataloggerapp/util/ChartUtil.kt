@@ -321,6 +321,15 @@ class ChartUtil(
         )
     }
 
+    fun addInitPoint(isUpdate: Boolean) {
+        addIntervalXYEntry(
+            arrayListOf(0.0f, 0.0f),
+            0,
+            1,
+            isUpdate
+        )
+    }
+
     fun addIntervalXYEntry(
         list: List<Float>,
         xIdx: Int,

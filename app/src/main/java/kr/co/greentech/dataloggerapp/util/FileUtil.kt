@@ -112,6 +112,8 @@ class FileUtil {
         writeFile(fileName, msg, false, path)
     }
 
+    fun Float.format(digits: Int) = "%.${digits}f".format(this)
+
     fun saveFile(
             list: ArrayList<Float>,
             mode: SaveType,
@@ -125,7 +127,7 @@ class FileUtil {
 
         for (idx in list.indices) {
             if (idx < channelList.size) {
-                msg.append(", ${list[idx]} ")
+                msg.append(", ${list[idx].format(channelList[idx].decPoint)} ")
             }
         }
 

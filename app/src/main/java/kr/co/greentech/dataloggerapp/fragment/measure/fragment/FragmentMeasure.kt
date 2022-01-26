@@ -640,6 +640,7 @@ class FragmentMeasure: Fragment() {
 
                 xyChart.post {
                     xyChartUtil?.clearChart()
+                    xyChartUtil?.addInitPoint(graphType == XY_CHART)
                 }
             }
 
@@ -1347,7 +1348,7 @@ class FragmentMeasure: Fragment() {
                     zeroAdjustList[idx] = false
                 }
             }
-
+            zeroClickFlag = true
             return
         }
     }
@@ -1433,6 +1434,10 @@ class FragmentMeasure: Fragment() {
                 val layout = BluetoothMeasureUIManager.getCSVHeaderLayout(requireContext(), ExcelItem(-1, channelNames, floatList, -1))
                 excelTopLayout.addView(layout)
                 chartChange(true)
+
+                if (channelCount < maxChannelCount) {
+                    zeroAdjustList = ArrayList<Boolean>(zeroAdjustList.subList(0, channelCount))
+                }
             }
         }
 
@@ -1588,12 +1593,8 @@ class FragmentMeasure: Fragment() {
                 }
 
                 val value = dataList[i].toFloat()
-                if (value < maxChannelCount) {
-                    firstValueList.add(value)
-                    i++
-                } else {
-                    dataList.removeAt(i)
-                }
+                firstValueList.add(value)
+                i++
             } else {
                 break
             }
