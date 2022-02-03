@@ -15,6 +15,7 @@ object PreferenceKey {
     const val SUM_SET = "KEY_SUM_SET"
     const val AVERAGE_SET = "KEY_AVERAGE_SET"
     const val ZERO_POINT_LIST = "KEY_ZERO_POINT_LIST"
+    const val FILTER_LIST = "KEY_FILTER_LIST"
 
     const val CHANNEL_COUNT = "KEY_CHANNEL_COUNT"
     const val MEASURE_SPEED = "KEY_MEASURE_SPEED_Float"

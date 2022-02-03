@@ -28,14 +28,11 @@ import kr.co.greentech.dataloggerapp.realm.RealmChannel
 import kr.co.greentech.dataloggerapp.realm.RealmGraphScaleSet
 import kr.co.greentech.dataloggerapp.realm.copy.CopyChannel
 import kr.co.greentech.dataloggerapp.realm.copy.CopyGraphScale
-import kr.co.greentech.dataloggerapp.util.objects.AlertUtil
 import kr.co.greentech.dataloggerapp.util.ChartUtil
 import kr.co.greentech.dataloggerapp.util.FileUtil
 import kr.co.greentech.dataloggerapp.util.eventbus.GlobalBus
 import kr.co.greentech.dataloggerapp.util.eventbus.MapEvent
-import kr.co.greentech.dataloggerapp.util.objects.FileManager
-import kr.co.greentech.dataloggerapp.util.objects.PreferenceKey
-import kr.co.greentech.dataloggerapp.util.objects.PreferenceManager
+import kr.co.greentech.dataloggerapp.util.objects.*
 import kr.co.greentech.dataloggerapp.util.recyclerview.RecyclerViewAdapter
 import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.excel.ExcelHolder
 import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.excel.ExcelItem
@@ -456,11 +453,7 @@ class FragmentGraphReview: Fragment() {
                                 val channelCount = floatChannelCount.toInt()
                                 this.channelCount = channelCount
 
-                                if (filterList.isEmpty()) {
-                                    for (i in 0 until channelCount) {
-                                        filterList.add(true)
-                                    }
-                                }
+                                setFilterDatas(channelCount)
 
                                 val size = filterList.filter { it }.size
 
@@ -548,11 +541,7 @@ class FragmentGraphReview: Fragment() {
                                 channelCount = floatChannelCount.toInt()
                                 this.channelCount = channelCount
 
-                                if (filterList.isEmpty()) {
-                                    for (i in 0 until channelCount) {
-                                        filterList.add(true)
-                                    }
-                                }
+                                setFilterDatas(channelCount)
 
                                 for (i in filterList.indices) {
                                     if(filterList[i]) {
@@ -824,6 +813,8 @@ class FragmentGraphReview: Fragment() {
                         filterList[idx] = checkList[idx]
                     }
 
+                    saveFilterDatas()
+
                     if (mode == INTERVAL) {
                         GlobalScope.async {
                             val intervalList = getIntervalDataList(readLine)
@@ -836,6 +827,40 @@ class FragmentGraphReview: Fragment() {
                 .setNegativeButton(getString(R.string.cancel), null)
                 .show()
     }
+
+    private fun saveFilterDatas() {
+        var str = ""
+        for (idx in filterList.indices) {
+            if (idx > 0)
+                str += ","
+            str += filterList[idx].toString()
+        }
+
+        Log.d("Asu", "Filter String: ${str}")
+        PreferenceManager.setString(PreferenceKey.FILTER_LIST, str)
+    }
+
+    private fun setFilterDatas(channelCount: Int) {
+        if (filterList.isEmpty()) {
+            for (i in 0 until channelCount) {
+                filterList.add(true)
+            }
+        }
+
+        val data = PreferenceManager.getString(PreferenceKey.FILTER_LIST)
+        if (data == PreferenceManager.DEFAULT_VALUE_STRING) return
+
+        val dataList = ArrayList<String>(data.split(","))
+
+        for (idx in dataList.indices) {
+            try {
+                filterList[idx] = dataList[idx].toBoolean()
+            } catch (e: Exception) {
+                Log.d("Asu", e.localizedMessage)
+            }
+        }
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun onEvent(event: MapEvent) {
