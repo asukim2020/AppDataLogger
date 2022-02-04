@@ -172,7 +172,10 @@ class RecyclerViewAdapter(val fragment: Fragment, var list: ArrayList<Any>): Rec
 
             EXCEL -> {
                 val view = when(viewType) {
-                    0 -> BluetoothMeasureUIManager.getLinearLayout(context)
+                    0 -> {
+                        ExcelHolder.copyChannelList = RealmChannel.getCopyChannelList()
+                        BluetoothMeasureUIManager.getLinearLayout(context)
+                    }
                     else -> BluetoothMeasureUIManager.getStepHeaderLayout(context)
                 }
                 ExcelHolder(context, view, this)

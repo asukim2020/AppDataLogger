@@ -126,7 +126,7 @@ object BluetoothMeasureUIManager {
         return tv
     }
 
-    fun setCSVLayout(context: Context, csvLayout: LinearLayout, excelItem: ExcelItem, position: Int = -1) {
+    fun setCSVLayout(context: Context, csvLayout: LinearLayout, excelItem: ExcelItem, position: Int = -1, copyChannelList: List<CopyChannel>?) {
 
         val width = 60.0F
         val height = 40.0F
@@ -171,7 +171,10 @@ object BluetoothMeasureUIManager {
                 0 -> tv.text = "${excelItem.number}"
                 1 -> tv.text = excelItem.elapsedTime
                 else -> {
-                    tv.text = excelItem.dataList[idx - 2].toString()
+                    tv.text = if (copyChannelList == null)
+                        excelItem.dataList[idx - 2].toString()
+                    else
+                        excelItem.dataList[idx - 2].toString().format(copyChannelList[idx].decPoint)
 
                     if (excelItem.readLine > 0) {
                         tv.setOnClickListener {

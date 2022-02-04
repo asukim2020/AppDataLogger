@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.greentech.dataloggerapp.fragment.measure.fragment.BluetoothMeasureUIManager
+import kr.co.greentech.dataloggerapp.realm.copy.CopyChannel
 import kr.co.greentech.dataloggerapp.util.recyclerview.RecyclerViewAdapter
 
 class ExcelHolder(
@@ -19,7 +20,7 @@ class ExcelHolder(
         val item = adapter.list[position]
 
         if (item is ExcelItem) {
-            BluetoothMeasureUIManager.setCSVLayout(context, view as LinearLayout, item, position)
+            BluetoothMeasureUIManager.setCSVLayout(context, view as LinearLayout, item, position, copyChannelList)
         }
 
         if (item is String) {
@@ -29,6 +30,8 @@ class ExcelHolder(
 
 
     companion object {
+        var copyChannelList: List<CopyChannel>? = null
+
         override fun toString(): String {
             return "ExcelHolder"
         }
