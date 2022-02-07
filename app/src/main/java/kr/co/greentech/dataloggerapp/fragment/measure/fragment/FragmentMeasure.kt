@@ -1143,6 +1143,8 @@ class FragmentMeasure: Fragment() {
         Toast.makeText(context, context.getString(R.string.measure_axis_exception), Toast.LENGTH_LONG).show()
     }
 
+
+
     private fun setAutoSelectChannelToMeasureList() {
         val leftYAxis = timeChartUtil?.leftYAxis ?: return
         val rightYAxis = timeChartUtil?.rightYAxis ?: return

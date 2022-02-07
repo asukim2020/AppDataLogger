@@ -136,7 +136,7 @@ class DialogFragmentStepSelect: DialogFragment() {
         val size = Point()
         display.getSize(size)
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
-        params?.width = CalculatorUtil.dpToPx(220.0F)
+        params?.width = CalculatorUtil.dpToPx(280.0F)
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 

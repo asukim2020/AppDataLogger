@@ -128,11 +128,11 @@
     <string name="draw_save_timing">파일 저장 시 표기</string>
     <string name="equal_interval_time_msg">등간격 시간을 설정합니다.</string>
     <string name="step_time_msg">스텝간격 시간을 설정합니다.</string>
-    <string name="select_using_step">사용할 스텝 선택</string>
+    <string name="select_using_step">사용자시간 선택</string>
     <string name="step_setting">Step 설정</string>
-    <string name="step_setting_number">STEP NO.%s 설정</string>
-    <string name="step_number">STEP NO.%s</string>
-    <string name="step_count">%s 단계(분)</string>
+    <string name="step_setting_number">사용자시간%s 설정</string>
+    <string name="step_number">사용자시간%s</string>
+    <string name="step_count">no.%s(분)</string>
     <string name="input_save_interval">저장 간격 입력(초)</string>
     <string name="save_equal_interval_setting">등간격 저장 설정</string>
     <string name="save_equal_interval">등간격 저장</string>
@@ -140,7 +140,7 @@
     <string name="save_step">스텝 저장</string>
     <string name="save_step_list">스텝 저장 목록</string>
     <string name="save_step_exception_msg">이전 스텝 값이 다음 스텝 값 보다 클 수 없습니다.</string>
-    <string name="select_step_msg">스텝을 선택해주세요.</string>
+    <string name="select_step_msg">재하단계하중을 입력해주세요.</string>
     <string name="graph_buffer_size">그래프 버퍼 크기</string>
     <string name="graph_buffer_size_limit_msg">버퍼크기는 최대 5000까지 가능합니다.</string>
     <string name="graph_buffer_size_least_msg">버퍼크기는 최소 100까지 가능합니다.</string>
