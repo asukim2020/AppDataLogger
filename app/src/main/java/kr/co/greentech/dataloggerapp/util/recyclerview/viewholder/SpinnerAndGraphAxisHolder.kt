@@ -7,6 +7,7 @@ import android.text.InputType
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.greentech.dataloggerapp.R
 import kr.co.greentech.dataloggerapp.application.DataLogApplication
@@ -25,6 +26,8 @@ class SpinnerAndGraphAxisHolder(
 
         if(adapter.list[position] is SpinnerItem) {
             val item = adapter.list[position] as SpinnerItem
+
+            val rootLayout = view.findViewById<ConstraintLayout>(R.id.root_layout)
 
             val title = view.findViewById<TextView>(R.id.name)
             title.text = item.title
@@ -47,6 +50,11 @@ class SpinnerAndGraphAxisHolder(
                 }
             }
             spinner.setSelection(item.selectItemPosition)
+            spinner.isEnabled = !item.disable
+            if (!spinner.isEnabled) {
+                rootLayout.foreground = ColorDrawable(DataLogApplication.getColor(R.color.separator))
+            }
+
         } else if (adapter.list[position] is GraphAxisItem) {
             val list = ArrayList<GraphAxisItem>()
 

@@ -32,12 +32,14 @@ class DialogFragmentChangeAxisAndScale: DialogFragment() {
     private lateinit var recyclerView: RecyclerView
 
     var isTimeChart = true
+    var isMeasure = false
 
     companion object {
-        fun newInstance(isTimeChart: Boolean): DialogFragmentChangeAxisAndScale {
+        fun newInstance(isTimeChart: Boolean, isMeasure: Boolean = false): DialogFragmentChangeAxisAndScale {
             val f = DialogFragmentChangeAxisAndScale()
             val args = Bundle()
             args.putBoolean("isTimeChart", isTimeChart)
+            args.putBoolean("isMeasure", isMeasure)
             f.arguments = args
             return f
         }
@@ -48,6 +50,7 @@ class DialogFragmentChangeAxisAndScale: DialogFragment() {
 
         val args = arguments!!
         isTimeChart = args.getBoolean("isTimeChart", true)
+        isMeasure = args.getBoolean("isMeasure", false)
     }
 
 
@@ -83,7 +86,8 @@ class DialogFragmentChangeAxisAndScale: DialogFragment() {
                 SpinnerItem(
                         if (isTimeChart) YAxisType.fromInt(0).getTitle() else XYAxisType.fromInt(0).getTitle(),
                         firstAxisType,
-                        if (isTimeChart) YAxisType.getItems() else xyItem
+                        if (isTimeChart) YAxisType.getItems() else xyItem,
+                    isMeasure
                 )
         )
 
@@ -91,7 +95,8 @@ class DialogFragmentChangeAxisAndScale: DialogFragment() {
                 SpinnerItem(
                         if (isTimeChart) YAxisType.fromInt(1).getTitle() else XYAxisType.fromInt(1).getTitle(),
                         secondAxisType,
-                        if (isTimeChart) YAxisType.getItems() else xyItem
+                        if (isTimeChart) YAxisType.getItems() else xyItem,
+                    isMeasure
                 )
         )
 

@@ -53,6 +53,15 @@ import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.excel.ExcelIte
 import kr.co.greentech.dataloggerapp.util.textview.VerticalTextView
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import android.R.attr.mode
+import android.view.ViewGroup.OnHierarchyChangeListener
+import androidx.appcompat.widget.AppCompatCheckedTextView
+
+import kr.co.greentech.dataloggerapp.fragment.savesetting.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
 
 class FragmentMeasure: Fragment() {
 
@@ -272,6 +281,8 @@ class FragmentMeasure: Fragment() {
         if (flag != null) {
             visibleRightTitleFlag = flag
         }
+
+        setAutoRemoveChannelToMeasureList()
 
         adapter = RecyclerViewAdapter(this, receivedDataList as ArrayList<Any>)
         recyclerView.adapter = adapter
@@ -1042,12 +1053,12 @@ class FragmentMeasure: Fragment() {
                         1 -> {
                             if (timeChartUtil != null) {
                                 DialogFragmentChangeAxisAndScale
-                                        .newInstance(true)
+                                        .newInstance(true, playFlag)
                                         .show(fragmentManager!!, "DialogFragmentChangeGraphYAxis")
                             }
                         }
                         2 -> {
-                            alertSelectChannelToMeasure(context, maxChannelCount)
+                            alertSelectChannelToMeasure(context, channelCount)
                         }
                         else -> {}
                     }
@@ -1060,10 +1071,13 @@ class FragmentMeasure: Fragment() {
             context: Context,
             channelCount: Int
     ) {
+        val leftYAxis = timeChartUtil?.leftYAxis ?: return
+        val rightYAxis = timeChartUtil?.rightYAxis ?: return
+
         val list = copyChannelList.subList(0, channelCount).map { it.name }.toTypedArray()
 
         val checkList = ArrayList<Boolean>()
-        for(i in 0 until maxChannelCount) {
+        for(i in 0 until channelCount) {
             var flag = false
             if (selectedChannelIndexList.contains(i)) {
                 flag = true
@@ -1099,80 +1113,140 @@ class FragmentMeasure: Fragment() {
                     val text = String.format(str, "$visibleChannelCount")
                     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
                 } else {
-                    selectedChannelIndexList = list
-                    setSelectedChannelList()
-
-                    var selectChannelString = ""
-                    for (item in list) {
-                        selectChannelString += ",$item"
-                    }
-
-                    PreferenceManager.setString(PreferenceKey.SELECTED_CHANNEL_TO_MEASURE, selectChannelString)
-
-                    var isOnCount = 0
-
-                    for (i in 0 until visibleChannelCount) {
-                        verticalTimeTitleTextList.getOrNull(i)?.text = "-"
-                        horizonTimeTitleTextList.getOrNull(i)?.text = "-"
-                        verticalTimeTextList.getOrNull(i)?.text = "-"
-                        horizonTimeTextList.getOrNull(i)?.text = "-"
-
-                        verticalTimeCheckboxLayoutList.getOrNull(i)?.setOnClickListener(null)
-                        horizonTimeCheckboxLayoutList.getOrNull(i)?.setOnClickListener(null)
-                        verticalTimeCheckboxList.getOrNull(i)?.setOnClickListener(null)
-                        horizonTimeCheckboxList.getOrNull(i)?.setOnClickListener(null)
-                    }
-
-                    for (i in list.indices) {
-                        val index = list[i]
-                        val name = "${copyChannelList[index].name}:"
-
-                        verticalTimeTitleTextList.getOrNull(i)?.text = name
-                        horizonTimeTitleTextList.getOrNull(i)?.text = name
-
-                        verticalTimeTextList.getOrNull(i)?.text = "-"
-                        horizonTimeTextList.getOrNull(i)?.text = "-"
-
-                        if (copyChannelList[index].isOn && index < visibleChannelCount) {
-                            val idx = isOnCount
-
-                            if (i < verticalTimeCheckboxLayoutList.size) {
-                                verticalTimeCheckboxLayoutList[i].setOnClickListener {
-                                    val checkbox = verticalTimeCheckboxList[i]
-                                    checkbox.isChecked = !checkbox.isChecked
-                                    timeChartUtil?.setVisible(idx, checkbox.isChecked)
-                                }
-                            }
-
-                            if (i < verticalTimeCheckboxList.size) {
-                                verticalTimeCheckboxList[i].setOnClickListener {
-                                    timeChartUtil?.setVisible(idx, verticalTimeCheckboxList[i].isChecked)
-                                }
-                            }
-
-                            if (i < horizonTimeCheckboxLayoutList.size) {
-                                horizonTimeCheckboxLayoutList[i].setOnClickListener {
-                                    val checkbox = horizonTimeCheckboxList[i]
-                                    checkbox.isChecked = !checkbox.isChecked
-                                    timeChartUtil?.setVisible(idx, checkbox.isChecked)
-                                }
-                            }
-
-                            if (i < horizonTimeCheckboxList.size) {
-                                horizonTimeCheckboxList[i].setOnClickListener {
-                                    timeChartUtil?.setVisible(idx, horizonTimeCheckboxList[i].isChecked)
-                                }
-                            }
-
-                            isOnCount++
-                        }
-                    }
-
+                    setSelectChannelToMeasureList(list)
                     alert.dismiss()
                 }
             }
         }
+
+        alert.listView.setOnHierarchyChangeListener(
+            object : OnHierarchyChangeListener {
+                override fun onChildViewAdded(parent: View, child: View) {
+                    try {
+                        val tv = (child as? AppCompatCheckedTextView) ?: return
+                        val copyChannel = copyChannelList.filter { it.name == tv.text }.first()
+                        val axis = copyChannel.graphAxis
+                        child.isEnabled = (axis == leftYAxis || axis == rightYAxis)
+                        if (!(axis == leftYAxis || axis == rightYAxis)) {
+                            child.setOnClickListener(null)
+                        }
+                    } catch(e: Exception) {
+                        Log.d("Asu", e.localizedMessage)
+                    }
+                }
+
+                override fun onChildViewRemoved(view: View, view1: View) {}
+            }
+        )
+
         alert.show()
+        Toast.makeText(context, context.getString(R.string.measure_axis_exception), Toast.LENGTH_LONG).show()
+    }
+
+    private fun setAutoSelectChannelToMeasureList() {
+        val leftYAxis = timeChartUtil?.leftYAxis ?: return
+        val rightYAxis = timeChartUtil?.rightYAxis ?: return
+
+        val list = ArrayList<Int>()
+        for (idx in copyChannelList.indices) {
+            val axis = copyChannelList[idx].graphAxis
+            if (axis == leftYAxis || axis == rightYAxis)
+                list.add(idx)
+        }
+
+        setSelectChannelToMeasureList(list)
+    }
+
+    private fun setAutoRemoveChannelToMeasureList() {
+        val leftYAxis = timeChartUtil?.leftYAxis ?: return
+        val rightYAxis = timeChartUtil?.rightYAxis ?: return
+
+        val removeList = ArrayList<Int>()
+
+        selectedChannelIndexList
+        for (idx in selectedChannelIndexList) {
+            val axis = copyChannelList[idx].graphAxis
+            if (!(axis == leftYAxis || axis == rightYAxis))
+                removeList.add(idx)
+        }
+
+        for (item in removeList) {
+            if (selectedChannelIndexList.contains(item))
+                selectedChannelIndexList.remove(item)
+        }
+
+        setSelectChannelToMeasureList(selectedChannelIndexList)
+    }
+
+    private fun setSelectChannelToMeasureList(list: ArrayList<Int>) {
+        selectedChannelIndexList = list
+        setSelectedChannelList()
+
+        var selectChannelString = ""
+        for (item in list) {
+            selectChannelString += ",$item"
+        }
+
+        PreferenceManager.setString(PreferenceKey.SELECTED_CHANNEL_TO_MEASURE, selectChannelString)
+
+        var isOnCount = 0
+
+        for (i in 0 until visibleChannelCount) {
+            verticalTimeTitleTextList.getOrNull(i)?.text = "-"
+            horizonTimeTitleTextList.getOrNull(i)?.text = "-"
+            verticalTimeTextList.getOrNull(i)?.text = "-"
+            horizonTimeTextList.getOrNull(i)?.text = "-"
+
+            verticalTimeCheckboxLayoutList.getOrNull(i)?.setOnClickListener(null)
+            horizonTimeCheckboxLayoutList.getOrNull(i)?.setOnClickListener(null)
+            verticalTimeCheckboxList.getOrNull(i)?.setOnClickListener(null)
+            horizonTimeCheckboxList.getOrNull(i)?.setOnClickListener(null)
+        }
+
+        for (i in list.indices) {
+            val index = list[i]
+            val name = "${copyChannelList[index].name}:"
+
+            verticalTimeTitleTextList.getOrNull(i)?.text = name
+            horizonTimeTitleTextList.getOrNull(i)?.text = name
+
+            verticalTimeTextList.getOrNull(i)?.text = "-"
+            horizonTimeTextList.getOrNull(i)?.text = "-"
+
+            if (copyChannelList[index].isOn && index < visibleChannelCount) {
+                val idx = isOnCount
+
+                if (i < verticalTimeCheckboxLayoutList.size) {
+                    verticalTimeCheckboxLayoutList[i].setOnClickListener {
+                        val checkbox = verticalTimeCheckboxList[i]
+                        checkbox.isChecked = !checkbox.isChecked
+                        timeChartUtil?.setVisible(idx, checkbox.isChecked)
+                    }
+                }
+
+                if (i < verticalTimeCheckboxList.size) {
+                    verticalTimeCheckboxList[i].setOnClickListener {
+                        timeChartUtil?.setVisible(idx, verticalTimeCheckboxList[i].isChecked)
+                    }
+                }
+
+                if (i < horizonTimeCheckboxLayoutList.size) {
+                    horizonTimeCheckboxLayoutList[i].setOnClickListener {
+                        val checkbox = horizonTimeCheckboxList[i]
+                        checkbox.isChecked = !checkbox.isChecked
+                        timeChartUtil?.setVisible(idx, checkbox.isChecked)
+                    }
+                }
+
+                if (i < horizonTimeCheckboxList.size) {
+                    horizonTimeCheckboxList[i].setOnClickListener {
+                        timeChartUtil?.setVisible(idx, horizonTimeCheckboxList[i].isChecked)
+                    }
+                }
+
+                isOnCount++
+            }
+        }
     }
 
     private fun alertTextChartSetting(
@@ -1281,6 +1355,7 @@ class FragmentMeasure: Fragment() {
                 visibleRightTitle(visibleRightTitleFlag)
                 timeChartUtil?.setGraphYScale(firstAxisScale, secondAxisScale, firstAxisType == secondAxisType)
                 setAxisTitle(firstAxisType, secondAxisType)
+                setAutoSelectChannelToMeasureList()
             } else {
                 xyChartUtil?.setGraphXScale(firstAxisScale)
                 xyChartUtil?.setGraphLeftYScale(secondAxisScale)

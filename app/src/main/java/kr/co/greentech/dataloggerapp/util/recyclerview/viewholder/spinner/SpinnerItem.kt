@@ -6,7 +6,8 @@ import android.widget.AdapterView
 class SpinnerItem(
         val title: String,
         var selectItemPosition: Int,
-        val itemList: ArrayList<String>
+        val itemList: ArrayList<String>,
+        val disable: Boolean = false
         ) {
     var onItemSelectedListener: AdapterView.OnItemSelectedListener
 

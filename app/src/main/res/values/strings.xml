@@ -50,6 +50,7 @@
     <string name="all_release_zero_point_msg">전체 영점 해제를 하시겠습니까?</string>
     <string name="file_char_exception_msg">파일 이름에는 일부 특수문자를 사용할 수 없습니다.</string>
     <string name="input_a_value">a 값 입력</string>
+    <string name="measure_axis_exception">y 축에 포함되지 않는 채널은 그래프에 그릴 수 없습니다.</string>
 
 
 
