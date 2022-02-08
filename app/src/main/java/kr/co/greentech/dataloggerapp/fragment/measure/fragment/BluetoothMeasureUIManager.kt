@@ -21,6 +21,7 @@ import kr.co.greentech.dataloggerapp.fragment.channel.enums.UnitType
 import kr.co.greentech.dataloggerapp.realm.copy.CopyChannel
 import kr.co.greentech.dataloggerapp.util.objects.CalculatorUtil
 import kr.co.greentech.dataloggerapp.util.ChartUtil
+import kr.co.greentech.dataloggerapp.util.TextUtil
 import kr.co.greentech.dataloggerapp.util.eventbus.GlobalBus
 import kr.co.greentech.dataloggerapp.util.eventbus.MapEvent
 import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.excel.ExcelHolder
@@ -174,7 +175,7 @@ object BluetoothMeasureUIManager {
                     tv.text = if (copyChannelList == null)
                         excelItem.dataList[idx - 2].toString()
                     else
-                        excelItem.dataList[idx - 2].toString().format(copyChannelList[idx].decPoint)
+                        TextUtil.floatToString(excelItem.dataList[idx - 2], copyChannelList[idx - 2].decPoint)
 
                     if (excelItem.readLine > 0) {
                         tv.setOnClickListener {

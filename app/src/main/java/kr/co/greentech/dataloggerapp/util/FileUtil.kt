@@ -127,7 +127,7 @@ class FileUtil {
 
         for (idx in list.indices) {
             if (idx < channelList.size) {
-                msg.append(", ${list[idx].format(channelList[idx].decPoint)} ")
+                msg.append(", ${TextUtil.floatToString(list[idx], channelList[idx].decPoint)} ")
             }
         }
 
