@@ -1445,7 +1445,7 @@ class FragmentMeasure: Fragment() {
         receivedJob?.cancel()
         receivedJob = GlobalScope.async(Dispatchers.Main) {
             while (true) {
-                if (lastReceivedMsg != "")
+                if (FragmentBluetoothMeasure.receivedMsg.toString() != "")
                     setBluetoothDataList()
 
                 delay(getMeasureInterval(1000L))
@@ -1455,6 +1455,10 @@ class FragmentMeasure: Fragment() {
 
     private fun setBluetoothDataList() {
 //        val start = System.currentTimeMillis()
+        val lastIdx = FragmentBluetoothMeasure.receivedMsg.indexOf("$") + 1
+        lastReceivedMsg = FragmentBluetoothMeasure.receivedMsg.substring(0, lastIdx)
+        FragmentBluetoothMeasure.receivedMsg.removeRange(0, lastIdx + 1)
+
         val list: ArrayList<Float>? = CalculatorUtil.getChannelDataList(
                 lastReceivedMsg,
                 ampGainList,
@@ -1467,7 +1471,7 @@ class FragmentMeasure: Fragment() {
         zeroClickFlag = false
 
 //        Log.d("Asu", "list: $list")
-        lastReceivedMsg = ""
+//        lastReceivedMsg = ""
         if (list != null) {
             runBlocking {
                 GlobalScope.launch {

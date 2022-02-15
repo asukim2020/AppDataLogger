@@ -39,6 +39,7 @@ class FragmentBluetoothMeasure: Fragment(), ServiceConnection, SerialListener {
         var service: SerialService? = null
         var connected = Connected.False
         const val MAX_RECONNECT_COUNT = 5
+        var receivedMsg = StringBuffer()
     }
 
     enum class Connected {
@@ -50,7 +51,6 @@ class FragmentBluetoothMeasure: Fragment(), ServiceConnection, SerialListener {
     private var pendingNewline = false
     private val newline: String = TextUtil.newline_crlf
 
-    private var receivedMsg = ""
     private var lastReceivedMsg = ""
 
     private lateinit var copyChannelList: List<CopyChannel>
@@ -236,17 +236,17 @@ class FragmentBluetoothMeasure: Fragment(), ServiceConnection, SerialListener {
             msg = msg.replace(TextUtil.newline_crlf, TextUtil.newline_lf)
             pendingNewline = msg[msg.length - 1] == '\r'
         }
-        receivedMsg += TextUtil.toCaretString(msg, newline.isNotEmpty())
+        receivedMsg.append(TextUtil.toCaretString(msg, newline.isNotEmpty()))
         if (receivedMsg[receivedMsg.length - 1] != '\n') {
             return
         }
 
-        val lastIdx = receivedMsg.indexOf("$") + 1
-        receivedMsg = receivedMsg.substring(0, lastIdx)
-        lastReceivedMsg = receivedMsg
-        receivedMsg = ""
+//        val lastIdx = receivedMsg.indexOf("$") + 1
+//        receivedMsg = receivedMsg.substring(0, lastIdx)
+//        lastReceivedMsg = receivedMsg
+//        receivedMsg = ""
 
-        measureFragment.setLastReceivedMsg(lastReceivedMsg)
+        measureFragment.setLastReceivedMsg("")
 
         if (reConnectCount != 0) {
             reConnectCount = 0
