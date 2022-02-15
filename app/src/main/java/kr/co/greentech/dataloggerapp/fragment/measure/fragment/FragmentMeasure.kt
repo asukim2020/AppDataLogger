@@ -785,6 +785,7 @@ class FragmentMeasure: Fragment() {
             if(selectedChannelIndexList.size != selectedChannelList.size) return@async
 
 //            val start = System.currentTimeMillis()
+            if (receivedData.isEmpty()) return@async
 
             lateinit var list: ArrayList<Float>
             val selectedList = ArrayList<Float>()
@@ -863,6 +864,8 @@ class FragmentMeasure: Fragment() {
                         xyChartUtil?.addStepXYEntry(stepp.toFloat(), max, graphType == XY_CHART)
                     }
                 }
+
+                receivedData.clear()
 
 //                val diff = System.currentTimeMillis() - start
 //                Log.d("Asu", "measureData diff: $diff")
@@ -1431,7 +1434,7 @@ class FragmentMeasure: Fragment() {
     }
 
     fun setLastReceivedMsg(lastReceivedMsg: String) {
-        this.lastReceivedMsg = lastReceivedMsg
+//        this.lastReceivedMsg = lastReceivedMsg
 
         count++
         countTextView.text = "Cnt: $count"
@@ -1445,7 +1448,7 @@ class FragmentMeasure: Fragment() {
         receivedJob?.cancel()
         receivedJob = GlobalScope.async(Dispatchers.Main) {
             while (true) {
-                if (FragmentBluetoothMeasure.receivedMsg.toString() != "")
+                if (FragmentBluetoothMeasure.receivedMsg.toString().contains("$"))
                     setBluetoothDataList()
 
                 delay(getMeasureInterval(1000L))
@@ -1455,9 +1458,13 @@ class FragmentMeasure: Fragment() {
 
     private fun setBluetoothDataList() {
 //        val start = System.currentTimeMillis()
+        Log.d("Asu", "begin")
+        Log.d("Asu", FragmentBluetoothMeasure.receivedMsg.toString())
         val lastIdx = FragmentBluetoothMeasure.receivedMsg.indexOf("$") + 1
         lastReceivedMsg = FragmentBluetoothMeasure.receivedMsg.substring(0, lastIdx)
-        FragmentBluetoothMeasure.receivedMsg.removeRange(0, lastIdx + 1)
+        FragmentBluetoothMeasure.receivedMsg.delete(0, lastIdx + 1)
+        Log.d("Asu", "after")
+        Log.d("Asu", FragmentBluetoothMeasure.receivedMsg.toString())
 
         val list: ArrayList<Float>? = CalculatorUtil.getChannelDataList(
                 lastReceivedMsg,
@@ -1471,7 +1478,7 @@ class FragmentMeasure: Fragment() {
         zeroClickFlag = false
 
 //        Log.d("Asu", "list: $list")
-//        lastReceivedMsg = ""
+        lastReceivedMsg = ""
         if (list != null) {
             runBlocking {
                 GlobalScope.launch {
