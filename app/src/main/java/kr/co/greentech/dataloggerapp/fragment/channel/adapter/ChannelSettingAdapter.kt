@@ -103,22 +103,23 @@ class ChannelSettingAdapter(val fragment: Fragment, val item: RealmChannel) : Re
         var adjustB: Float = 0.0F
         var lineColor: String? = null
 
-        for (item in list) {
-            when (item.item) {
-                NAME -> name = item.editText
-                SENSOR_TYPE -> type = item.selectItemPosition
-                DEC_POINT -> decPoint = item.selectItemPosition
-                UNIT -> unit = item.selectItemPosition
-                UNIT_INPUT -> unitInput = item.editText
+        for (obj in list) {
+            when (obj.item) {
+                NAME -> name = obj.editText
+                SENSOR_TYPE -> type = obj.selectItemPosition
+                DEC_POINT -> decPoint = obj.selectItemPosition
+                UNIT -> unit = obj.selectItemPosition
+                UNIT_INPUT -> unitInput = obj.editText
                 CAPACITY -> capacity =
-                        if (item.editText.toFloatOrNull() != null) {
-                            val capacity = item.editText.toFloat()
-                            when(SensorType.fromInt(type)) {
+                        if (obj.editText.toFloatOrNull() != null) {
+                            var adDecPoint = 0
+                            val capacity = obj.editText.toFloat()
+                            when (SensorType.fromInt(type)) {
                                 SensorType.GAGE4_SENSOR,
                                 SensorType.LVDT_POT,
                                 SensorType.VOLT -> {
 
-                                    decPoint = when {
+                                    adDecPoint = when {
                                         1000 <= capacity -> 0
                                         100 <= capacity && capacity < 1000 -> 1
                                         10 <= capacity && capacity < 100 -> 2
@@ -126,20 +127,23 @@ class ChannelSettingAdapter(val fragment: Fragment, val item: RealmChannel) : Re
                                     }
                                 }
                             }
+                            if (decPoint < adDecPoint) {
+                                decPoint = adDecPoint
+                            }
                             capacity
                         }
                         else 0.0F
                 RO -> ro =
-                        if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
+                        if (obj.editText.toFloatOrNull() != null) obj.editText.toFloat() else 0.0F
                 GF -> gf =
-                        if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
-                GRAPH_AXIS -> graphAxis = item.selectItemPosition
-                FILTER -> filter = item.selectItemPosition
+                        if (obj.editText.toFloatOrNull() != null) obj.editText.toFloat() else 0.0F
+                GRAPH_AXIS -> graphAxis = obj.selectItemPosition
+                FILTER -> filter = obj.selectItemPosition
                 ADJUST_A -> adjustA =
-                        if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
+                        if (obj.editText.toFloatOrNull() != null) obj.editText.toFloat() else 0.0F
                 ADJUST_B -> adjustB =
-                        if (item.editText.toFloatOrNull() != null) item.editText.toFloat() else 0.0F
-                LINE_COLOR -> lineColor = item.color
+                        if (obj.editText.toFloatOrNull() != null) obj.editText.toFloat() else 0.0F
+                LINE_COLOR -> lineColor = obj.color
             }
         }
 
