@@ -126,9 +126,9 @@ class FragmentChannelSetting: Fragment() {
     public fun onEvent(event: MapEvent) {
         val map = event.map
 
-        val channelAllSetting = map.getOrDefault(DialogFragmentChannelAllSetting.toString(), null)
+        val channelAllSetting = map[DialogFragmentChannelAllSetting.toString()]
         if(channelAllSetting != null) {
-            val list = map.getOrDefault("CheckBoxItemList", null) as? ArrayList<CheckBoxItem>
+            val list = map["CheckBoxItemList"] as? ArrayList<CheckBoxItem>
             if (list != null) {
                 channelAllList = list
                 adapter.saveRealm(channelAllList)

@@ -125,9 +125,9 @@ class FragmentChannelList: Fragment() {
     public fun onEvent(event: MapEvent) {
         val map = event.map
 
-        val channelHolder = map.getOrDefault(ChannelHolder.toString(), null)
+        val channelHolder = map[ChannelHolder.toString()]
         if(channelHolder != null) {
-            val position = map.getOrDefault("position", null) as? Int
+            val position = map["position"] as? Int
             if (position != null) {
                 itemClick(position)
             }

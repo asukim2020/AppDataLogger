@@ -1321,11 +1321,11 @@ class FragmentMeasure: Fragment() {
     public fun onEvent(event: MapEvent) {
         val map = event.map
 
-        val fileSaveFragment = map.getOrDefault(DialogFragmentFileSave.toString(), null)
+        val fileSaveFragment = map[DialogFragmentFileSave.toString()]
         if(fileSaveFragment != null) {
-            val isOn: Boolean? = map.getOrDefault("isOn", null) as? Boolean
-            val fileName: String? = map.getOrDefault("fileName", null) as? String
-            val path: String? = map.getOrDefault("path", null) as? String
+            val isOn: Boolean? = map["isOn"] as? Boolean
+            val fileName: String? = map["fileName"] as? String
+            val path: String? = map["path"] as? String
 
             if (isOn != null
                     && fileName != null) {
@@ -1338,35 +1338,35 @@ class FragmentMeasure: Fragment() {
             return
         }
 
-        val stepSelectFragment = map.getOrDefault(DialogFragmentStepSelect.toString(), null)
+        val stepSelectFragment = map[DialogFragmentStepSelect.toString()]
         if(stepSelectFragment != null) {
-            stepp = map.getOrDefault("STEP P", null) as String
-            val startFlag = map.getOrDefault("startFlag", null) as Boolean
+            stepp = map["STEP P"] as String
+            val startFlag = map["startFlag"] as Boolean
             if (startFlag) {
                 measureStart(this.fileIsOn!!)
             }
             return
         }
 
-        val adjustGraphRangeFragment = map.getOrDefault(DialogFragmentChangeGraphXAxis.toString(), null)
+        val adjustGraphRangeFragment = map[DialogFragmentChangeGraphXAxis.toString()]
         if(adjustGraphRangeFragment != null) {
-            val xAxis = map.getOrDefault("xAxis", null) as? CopyGraphScale
+            val xAxis = map["xAxis"] as? CopyGraphScale
             if (xAxis != null) {
                 timeChartUtil?.setGraphXScale(xAxis)
             }
             return
         }
 
-        val changeGraphYAxisFragment = map.getOrDefault(DialogFragmentChangeAxisAndScale.toString(), null)
+        val changeGraphYAxisFragment = map[DialogFragmentChangeAxisAndScale.toString()]
         if(changeGraphYAxisFragment != null) {
 
-            val firstAxisType = map.getOrDefault("firstAxisType", null) as Int
-            val secondAxisType = map.getOrDefault("secondAxisType", null) as Int
+            val firstAxisType = map["firstAxisType"] as Int
+            val secondAxisType = map["secondAxisType"] as Int
 
-            val firstAxisScale = map.getOrDefault("firstAxisScale", null) as CopyGraphScale
-            val secondAxisScale = map.getOrDefault("secondAxisScale", null) as CopyGraphScale
+            val firstAxisScale = map["firstAxisScale"] as CopyGraphScale
+            val secondAxisScale = map["secondAxisScale"] as CopyGraphScale
 
-            val isTimeChart = map.getOrDefault("isTimeChart", null) as Boolean
+            val isTimeChart = map["isTimeChart"] as Boolean
 
             timeChartUtil?.changeGraphYAxis(
                     firstAxisType,
@@ -1402,13 +1402,13 @@ class FragmentMeasure: Fragment() {
             return
         }
 
-        val stepXYSetting = map.getOrDefault(DialogFragmentStepXYSetting.toString(), null)
+        val stepXYSetting = map[DialogFragmentStepXYSetting.toString()]
         if(stepXYSetting != null) {
 
-            val firstAxisType = map.getOrDefault("firstAxisType", null) as Int
+            val firstAxisType = map["firstAxisType"] as Int
 
-            val firstAxisScale = map.getOrDefault("firstAxisScale", null) as CopyGraphScale
-            val secondAxisScale = map.getOrDefault("secondAxisScale", null) as CopyGraphScale
+            val firstAxisScale = map["firstAxisScale"] as CopyGraphScale
+            val secondAxisScale = map["secondAxisScale"] as CopyGraphScale
 
             xyChartUtil?.setGraphXScale(firstAxisScale)
             xyChartUtil?.setGraphLeftYScale(secondAxisScale)
@@ -1431,9 +1431,9 @@ class FragmentMeasure: Fragment() {
             return
         }
 
-        val channelAllSetting = map.getOrDefault(DialogFragmentAdjustZero.toString(), null)
+        val channelAllSetting = map[DialogFragmentAdjustZero.toString()]
         if(channelAllSetting != null) {
-            val list = map.getOrDefault("CheckBoxItemList", null) as? ArrayList<AdjustCheckBoxItem>
+            val list = map["CheckBoxItemList"] as? ArrayList<AdjustCheckBoxItem>
             if (list != null) {
                 for (item in list) {
                     for (idx in list.indices) {

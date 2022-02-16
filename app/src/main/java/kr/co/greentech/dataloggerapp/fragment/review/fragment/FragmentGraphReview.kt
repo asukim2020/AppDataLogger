@@ -866,25 +866,25 @@ class FragmentGraphReview: Fragment() {
     public fun onEvent(event: MapEvent) {
         val map = event.map
 
-        val adjustGraphRangeFragment = map.getOrDefault(DialogFragmentChangeGraphXAxis.toString(), null)
+        val adjustGraphRangeFragment = map[DialogFragmentChangeGraphXAxis.toString()]
         if(adjustGraphRangeFragment != null) {
-            val xAxis = map.getOrDefault("xAxis", null) as? CopyGraphScale
+            val xAxis = map["xAxis"] as? CopyGraphScale
             if (xAxis != null) {
                 timeChartUtil.setGraphXScale(xAxis)
             }
             return
         }
 
-        val changeGraphYAxisFragment = map.getOrDefault(DialogFragmentChangeAxisAndScale.toString(), null)
+        val changeGraphYAxisFragment = map[DialogFragmentChangeAxisAndScale.toString()]
         if(changeGraphYAxisFragment != null) {
 
-            val firstAxisType = map.getOrDefault("firstAxisType", null) as Int
-            val secondAxisType = map.getOrDefault("secondAxisType", null) as Int
+            val firstAxisType = map["firstAxisType"] as Int
+            val secondAxisType = map["secondAxisType"] as Int
 
-            val firstAxisScale = map.getOrDefault("firstAxisScale", null) as CopyGraphScale
-            val secondAxisScale = map.getOrDefault("secondAxisScale", null) as CopyGraphScale
+            val firstAxisScale = map["firstAxisScale"] as CopyGraphScale
+            val secondAxisScale = map["secondAxisScale"] as CopyGraphScale
 
-            val isTimeChart = map.getOrDefault("isTimeChart", null) as Boolean
+            val isTimeChart = map["isTimeChart"] as Boolean
 
             val selectedChannelIndexList = ArrayList<Int>()
             for (i in filterList.indices) {
@@ -926,13 +926,13 @@ class FragmentGraphReview: Fragment() {
             return
         }
 
-        val stepXYSetting = map.getOrDefault(DialogFragmentStepXYSetting.toString(), null)
+        val stepXYSetting = map[DialogFragmentStepXYSetting.toString()]
         if(stepXYSetting != null) {
 
-            val firstAxisType = map.getOrDefault("firstAxisType", null) as Int
+            val firstAxisType = map["firstAxisType"] as Int
 
-            val firstAxisScale = map.getOrDefault("firstAxisScale", null) as CopyGraphScale
-            val secondAxisScale = map.getOrDefault("secondAxisScale", null) as CopyGraphScale
+            val firstAxisScale = map["firstAxisScale"] as CopyGraphScale
+            val secondAxisScale = map["secondAxisScale"] as CopyGraphScale
 
             xyChartUtil.setGraphLeftYScale(secondAxisScale)
             xyChartUtil.setGraphXScale(firstAxisScale)
@@ -955,16 +955,16 @@ class FragmentGraphReview: Fragment() {
             return
         }
 
-        val excelHolderString = map.getOrDefault(ExcelHolder.toString(), null)
+        val excelHolderString = map[ExcelHolder.toString()]
         if (excelHolderString != null) {
             editExcelItemAlert(map)
         }
     }
 
     private fun editExcelItemAlert(map: HashMap<String, Any>) {
-        val excelItem = map.getOrDefault("excelItem", null) as ExcelItem
-        val index = map.getOrDefault("index", null) as Int
-        val position = map.getOrDefault("position", null) as Int
+        val excelItem = map["excelItem"] as ExcelItem
+        val index = map["index"] as Int
+        val position = map["position"] as Int
 
         val bobTheBuilder = android.app.AlertDialog.Builder(context)
         bobTheBuilder.setView(R.layout.dialog_rename).setTitle(getString(R.string.edit) + " (CH${index + 1}, ${position + 1})")
@@ -990,9 +990,9 @@ class FragmentGraphReview: Fragment() {
     }
 
     private fun editExcelItem(map: HashMap<String, Any>, editTextString: String) {
-        val excelItem = map.getOrDefault("excelItem", null) as ExcelItem
-        val index = map.getOrDefault("index", null) as Int
-        val position = map.getOrDefault("position", null) as Int
+        val excelItem = map["excelItem"] as ExcelItem
+        val index = map["index"] as Int
+        val position = map["position"] as Int
 
         val string =
                 if (editLineMap[excelItem.readLine] != null)

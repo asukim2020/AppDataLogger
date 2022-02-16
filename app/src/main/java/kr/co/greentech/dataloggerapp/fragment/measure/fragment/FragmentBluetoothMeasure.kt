@@ -315,15 +315,15 @@ class FragmentBluetoothMeasure: Fragment(), ServiceConnection, SerialListener {
     public fun onEvent(event: MapEvent) {
         val map = event.map
 
-        val fragmentMeasure = map.getOrDefault(FragmentMeasure.toString(), null)
+        val fragmentMeasure = map[FragmentMeasure.toString()]
         if (fragmentMeasure != null) {
-            val clearFragmentStack = map.getOrDefault("clearFragmentStack", null)
+            val clearFragmentStack = map["clearFragmentStack"]
 
             if (clearFragmentStack != null) {
                 clearFragmentStack()
             }
 
-            val notConnect = map.getOrDefault("notConnect", null)
+            val notConnect = map["notConnect"]
             if (notConnect != null) {
                 if (service != null) {
                     progressLayout.visibility = View.VISIBLE
@@ -333,7 +333,7 @@ class FragmentBluetoothMeasure: Fragment(), ServiceConnection, SerialListener {
                 }
             }
 
-            val addBackButtonEvent = map.getOrDefault("addBackButtonEvent", null)
+            val addBackButtonEvent = map["addBackButtonEvent"]
             if (addBackButtonEvent != null) {
                 addBackButtonEvent()
             }

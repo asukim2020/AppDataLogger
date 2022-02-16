@@ -135,8 +135,8 @@ class DialogFragmentFileSave: DialogFragment() {
     @Subscribe
     public fun onEvent(event: MapEvent) {
         val map = event.map
-        if (map.getOrDefault(DialogFragmentFolderList.toString(), null) != null) {
-            val path: String? = map.getOrDefault("path", null) as? String
+        if (map[DialogFragmentFolderList.toString()] != null) {
+            val path: String? = map["path"] as? String
             if (path != null) {
                 setPath(path)
             }
