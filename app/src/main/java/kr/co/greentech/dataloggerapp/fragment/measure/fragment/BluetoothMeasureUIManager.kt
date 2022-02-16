@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Typeface
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -291,13 +292,14 @@ object BluetoothMeasureUIManager {
 
     private fun setSubTextChartMultiColumn(
             context: Context,
-            cellCount: Int,
+            cellCount: Int, // 보여줄 채널 개수
             copyChannelList: List<CopyChannel>,
             textList: ArrayList<TextView>,
-            column: Int,
+            column: Int, // 가로로 몇개 분할 할 것인지
             pageCount: Int = 0,
             linearLayout: LinearLayout
     ) {
+        val copyTestList = ArrayList<TextView>()
         val inflater = LayoutInflater.from(context)
         val weightSum = 100.0F
 
@@ -353,16 +355,29 @@ object BluetoothMeasureUIManager {
 
                 layout.layoutParams = layoutParams
 
-                val index = (idx * column) + i
+                // idx == 헹
+                // column == 총 열 수
+                //i == 열
+//                val index = (idx * column) + i
+                val index = idx + ((cellCount / column) * i)
+//                Log.d("Asu", "index: $index")
 
                 setTextViewName(v.findViewById(R.id.tv_title), index, copyChannelList, pageCount, cellCount)
                 setTextViewUnit(context, v.findViewById(R.id.tv_unit), index, copyChannelList, pageCount, cellCount)
-                setDateText(v.findViewById(R.id.tv), index, copyChannelList, textList, pageCount, cellCount)
+                setDateText(v.findViewById(R.id.tv), index, copyChannelList, copyTestList, pageCount, cellCount)
 
                 rootLayout.addView(layout)
             }
 
             linearLayout.addView(rootLayout)
+        }
+
+        val row = (cellCount / column)
+        for (i in 0 until cellCount) {
+            val order = i / row
+            val mod = i % row
+            val index = (mod * column) + order
+            textList.add(copyTestList[index])
         }
     }
 
