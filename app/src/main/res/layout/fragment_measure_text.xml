@@ -63,7 +63,6 @@
         android:autoSizeMaxTextSize="300sp"
         android:autoSizeStepGranularity="1sp"
         android:autoSizeMinTextSize="14sp"
-        android:maxLines="1"
-        android:text="0" />
+        android:maxLines="1" />
 
 </LinearLayout>
