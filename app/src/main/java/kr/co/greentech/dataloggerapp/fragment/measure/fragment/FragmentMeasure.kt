@@ -658,8 +658,8 @@ class FragmentMeasure: Fragment() {
             when(mode) {
                 SaveType.INTERVAL -> {
                     while (true) {
-                        measureData(fileIsOn, mode, interval)
-                        delay(getMeasureInterval(interval))
+                        measureData(fileIsOn, mode, (interval / measureSpeed).toLong())
+                        delay(getDelay(interval))
                     }
                 }
 
@@ -694,10 +694,10 @@ class FragmentMeasure: Fragment() {
                             for (idx in list.indices) {
                                 if (idx <= 0) {
                                     val delayInterval = list[idx] * interval
-                                    delay(getMeasureInterval(delayInterval))
+                                    delay(getDelay(delayInterval))
                                 } else {
                                     val delayInterval = (list[idx] - list[idx - 1]) * interval
-                                    delay(getMeasureInterval(delayInterval))
+                                    delay(getDelay(delayInterval))
                                 }
 
                                 var totalInterval = list[idx]
@@ -723,7 +723,7 @@ class FragmentMeasure: Fragment() {
                                 measureData(isOn, mode, elapsedTime, list)
 
                                 val diff = System.currentTimeMillis() - start
-                                delay(getMeasureInterval(interval) - diff)
+                                delay(getDelay(interval) - diff)
                                 elapsedTime += interval
                             }
 
@@ -766,11 +766,12 @@ class FragmentMeasure: Fragment() {
 
             while (true) {
                 val startTime = System.currentTimeMillis()
-                val elapsedTime = FileUtil.getElapsedTime(initTimeInterval, startTime + getMeasureInterval(1000L), measureSpeed)
+                val elapsedTime = FileUtil.getElapsedTime(initTimeInterval, startTime, 1f)
+                Log.d("Asu", "elapsedTime: " + elapsedTime + ", diff: " + (startTime - initTimeInterval) + ", measure speed: " + measureSpeed)
                 tvTime.post {
                     tvTime.text = elapsedTime
                 }
-                delay(getMeasureInterval(1000L))
+                delay(getDelay(1000L))
             }
         }
     }
@@ -848,6 +849,8 @@ class FragmentMeasure: Fragment() {
                         timeChartUtil?.addStepEntry(
                                 interval.toFloat() / 1000.0F,
                                 selectedList,
+
+
                                 selectedChannelList,
                                 graphType == TIME_CHART,
                                 stepMeasureCount,
@@ -1448,7 +1451,7 @@ class FragmentMeasure: Fragment() {
                 if (lastReceivedMsg != "")
                     setBluetoothDataList()
 
-                delay(getMeasureInterval(1000L))
+                delay(getDelay(1000L))
             }
         }
     }
@@ -1651,7 +1654,7 @@ class FragmentMeasure: Fragment() {
         return sendString.toString()
     }
 
-    private fun getMeasureInterval(interval: Long): Long {
+    private fun getDelay(interval: Long): Long {
         val measureSpeed1000 = (measureSpeed * 1000.0).toLong()
         return (interval * 1000L) / measureSpeed1000
     }
