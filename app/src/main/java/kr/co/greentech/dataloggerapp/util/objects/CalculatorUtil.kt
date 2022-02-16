@@ -62,7 +62,7 @@ object CalculatorUtil {
             zeroClickFlag: Boolean
     ): ArrayList<Float>? {
         if (lastMsg === "") return null
-        Log.d("Asu", lastMsg)
+//        Log.d("Asu", lastMsg)
 
         var msg: String = lastMsg!!
         msg = msg.replace("+", " , ")

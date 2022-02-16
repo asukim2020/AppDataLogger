@@ -767,7 +767,7 @@ class FragmentMeasure: Fragment() {
             while (true) {
                 val startTime = System.currentTimeMillis()
                 val elapsedTime = FileUtil.getElapsedTime(initTimeInterval, startTime, 1f)
-                Log.d("Asu", "elapsedTime: " + elapsedTime + ", diff: " + (startTime - initTimeInterval) + ", measure speed: " + measureSpeed)
+//                Log.d("Asu", "elapsedTime: " + elapsedTime + ", diff: " + (startTime - initTimeInterval) + ", measure speed: " + measureSpeed)
                 tvTime.post {
                     tvTime.text = elapsedTime
                 }
