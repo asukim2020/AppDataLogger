@@ -134,10 +134,10 @@ class FragmentOtherSetting: Fragment() {
             EditTextItem(bufferSize.toString(), getString(R.string.graph_buffer_size))
         )
 
-        val measureSpeed = PreferenceManager.getFloat(PreferenceKey.MEASURE_SPEED)
-        list.add(
-            EditTextItem(measureSpeed.toString(), getString(R.string.measure_speed))
-        )
+//        val measureSpeed = PreferenceManager.getFloat(PreferenceKey.MEASURE_SPEED)
+//        list.add(
+//            EditTextItem(measureSpeed.toString(), getString(R.string.measure_speed))
+//        )
 
         list.add(sumString)
         list.add(avgString)
@@ -210,15 +210,15 @@ class FragmentOtherSetting: Fragment() {
         val bufferSize = (adapter.list[7] as EditTextItem).editText.toInt()
         PreferenceManager.setInt(PreferenceKey.GRAPH_BUFFER_SIZE, bufferSize)
 
-        val measureSpeed = (adapter.list[8] as EditTextItem).editText.toFloat()
-        if (BuildConfig.DEBUG) {
-            PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, measureSpeed)
-        } else {
-            if (measureSpeed > 10.0F) {
-                PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, 10.0F)
-            } else {
-                PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, measureSpeed)
-            }
-        }
+//        val measureSpeed = (adapter.list[8] as EditTextItem).editText.toFloat()
+//        if (BuildConfig.DEBUG) {
+//            PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, measureSpeed)
+//        } else {
+//            if (measureSpeed > 10.0F) {
+//                PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, 10.0F)
+//            } else {
+//                PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, measureSpeed)
+//            }
+//        }
     }
 }

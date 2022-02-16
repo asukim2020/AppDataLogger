@@ -19,6 +19,7 @@ import kr.co.greentech.dataloggerapp.realm.RealmSaveSetting
 import kr.co.greentech.dataloggerapp.util.AdapterUtil
 import kr.co.greentech.dataloggerapp.util.objects.CalculatorUtil
 import kr.co.greentech.dataloggerapp.util.extension.addSeparator
+import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.spinner.SpinnerItem
 
 object ListViewGetViewSet {
 
@@ -109,11 +110,60 @@ object ListViewGetViewSet {
         return view
     }
 
+    fun spinnerGetView(
+        convertView: View?,
+        parent: ViewGroup,
+        listAdapter: ListViewAdapter,
+        item: SpinnerItem
+    ): View {
+        val context = parent.context
+
+        lateinit var view: View
+
+        view = if (convertView == null) {
+            val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            inflater.inflate(R.layout.list_item_spinner, parent, false)
+        } else {
+            convertView
+        }
+
+        if (convertView == null) {
+            view.findViewById<ConstraintLayout>(R.id.root_layout).addSeparator(20.0F)
+        }
+
+        val title = view.findViewById<TextView>(R.id.name)
+        title.text = item.title
+
+        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        val adapter: ArrayAdapter<String> = AdapterUtil.getSpinnerAdapter(
+            context,
+            spinner,
+            item.itemList
+        )
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                item.selectItemPosition = position
+                val intervalItem = listAdapter.getItemOrNull(1) as? SaveSettingItem
+                if (position == 0 && intervalItem != null) {
+                    listAdapter.removeAt(1)
+                    listAdapter.notifyDataSetChanged()
+                } else if (position == 1 && intervalItem == null) {
+                    listAdapter.add(SaveSettingItem(EqualIntervalSaveSettingType.INTERVAL))
+                    listAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        spinner.setSelection(item.selectItemPosition)
+
+        return view
+    }
+
     fun equalIntervalGetView(
-            position: Int,
             convertView: View?,
             parent: ViewGroup,
-            list: ArrayList<SaveSettingItem>,
+            list: SaveSettingItem,
             item: RealmSaveSetting
     ): View {
         val context = parent.context
@@ -122,7 +172,7 @@ object ListViewGetViewSet {
 
         view = if (convertView == null) {
             val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            when(list[position].item) {
+            when(list.item) {
                 EqualIntervalSaveSettingType.INTERVAL -> inflater.inflate(R.layout.list_item_edit_text, parent, false)
             }
         } else {
@@ -133,20 +183,26 @@ object ListViewGetViewSet {
             view.findViewById<ConstraintLayout>(R.id.root_layout).addSeparator(20.0F)
         }
 
-        val title = view.findViewById<TextView>(R.id.name)
-        title.text = list[position].item.getTitle(context)
+        if (list.isHidden) {
+            view.visibility = View.INVISIBLE
+        } else {
+            view.visibility = View.VISIBLE
+        }
 
-        when(list[position].item) {
+        val title = view.findViewById<TextView>(R.id.name)
+        title.text = list.item.getTitle(context)
+
+        when(list.item) {
             EqualIntervalSaveSettingType.INTERVAL -> {
                 val tvEdit = view.findViewById<EditText>(R.id.tv_edit)
-                tvEdit.removeTextChangedListener(list[position].textWatcher)
+                tvEdit.removeTextChangedListener(list.textWatcher)
 
-                if (list[position].editText == "") {
-                    list[position].editText = item.interval.toString()
+                if (list.editText == "") {
+                    list.editText = item.interval.toString()
                 }
 
-                tvEdit.setText(list[position].editText)
-                tvEdit.addTextChangedListener(list[position].textWatcher)
+                tvEdit.setText(list.editText)
+                tvEdit.addTextChangedListener(list.textWatcher)
                 tvEdit.inputType = InputType.TYPE_CLASS_NUMBER
             }
         }

@@ -17,6 +17,7 @@ import kr.co.greentech.dataloggerapp.realm.RealmSaveSetting
 import kr.co.greentech.dataloggerapp.util.objects.CalculatorUtil
 import kr.co.greentech.dataloggerapp.util.listview.enum.ListViewType
 import kr.co.greentech.dataloggerapp.util.listview.enum.ListViewType.*
+import kr.co.greentech.dataloggerapp.util.recyclerview.viewholder.spinner.SpinnerItem
 
 class ListViewAdapter(val fragment: Fragment, var list: ArrayList<Any>): BaseAdapter() {
 
@@ -41,6 +42,18 @@ class ListViewAdapter(val fragment: Fragment, var list: ArrayList<Any>): BaseAda
         return list[position]
     }
 
+    fun getItemOrNull(position: Int): Any? {
+        return list.getOrNull(position)
+    }
+
+    fun add(item: Any) {
+        list.add(item)
+    }
+
+    fun removeAt(position: Int) {
+        list.removeAt(position)
+    }
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
@@ -58,8 +71,24 @@ class ListViewAdapter(val fragment: Fragment, var list: ArrayList<Any>): BaseAda
             }
 
             INTERVAL -> {
-                val item = RealmSaveSetting.select()!!
-                ListViewGetViewSet.equalIntervalGetView(position, convertView, parent, list as ArrayList<SaveSettingItem>, item)
+                val list = getItem(position)
+                if (list is SaveSettingItem) {
+                    val item = RealmSaveSetting.select()!!
+                    ListViewGetViewSet.equalIntervalGetView(
+                        convertView,
+                        parent,
+                        list,
+                        item
+                    )
+                } else {
+                    val item = getItem(position)
+                    ListViewGetViewSet.spinnerGetView(
+                        convertView,
+                        parent,
+                        this,
+                        item as SpinnerItem
+                    )
+                }
             }
         }
     }

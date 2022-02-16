@@ -8,6 +8,7 @@ class SaveSettingItem(val item: EqualIntervalSaveSettingType) {
 
     var editText = ""
     var textWatcher: TextWatcher? = null
+    var isHidden: Boolean = false
 
     init {
         textWatcher = object : TextWatcher {
