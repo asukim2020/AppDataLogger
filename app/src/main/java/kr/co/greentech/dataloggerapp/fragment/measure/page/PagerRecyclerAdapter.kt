@@ -56,15 +56,19 @@ class PagerRecyclerAdapter(var maxChannelCount: Int, var cellCount: Int, private
         val isAsync = (position == 1 || position == 2)
 
         return PagerViewHolder(
-                BluetoothMeasureUIManager.getTextChartMultiColumn(
-                        context,
-                        cellCount,
-                        copyChannelList,
-                        textList,
-                        if (cellCount >= 8) 2 else 1,
-                        position,
-                        isAsync
-                )
+            BluetoothMeasureUIManager.getTextChartMultiColumn(
+                context,
+                cellCount,
+                copyChannelList,
+                textList,
+                when {
+                    8 < cellCount -> 4
+                    cellCount in 5..15 -> 2
+                    else -> 1
+                },
+                position,
+                isAsync
+            )
         )
     }
 }

@@ -1254,33 +1254,53 @@ class FragmentMeasure: Fragment() {
         }
     }
 
+    fun isTablet(context: Context): Boolean {
+        val xlarge = context.resources
+            .configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === 4
+        val large = context.resources
+            .configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === Configuration.SCREENLAYOUT_SIZE_LARGE
+        return xlarge or large
+    }
+
     private fun alertTextChartSetting(
             context: Context
     ) {
-        val titles = arrayOf(
+        val titles = if (isTablet(context)) {
+            arrayOf(
                 context.getString(R.string.channel_1),
                 context.getString(R.string.channel_2),
                 context.getString(R.string.channel_4),
-                context.getString(
-                        R.string.channel_8
-                )
-        )
+                context.getString(R.string.channel_8),
+                context.getString(R.string.channel_16)
+            )
+
+        } else {
+            arrayOf(
+                context.getString(R.string.channel_1),
+                context.getString(R.string.channel_2),
+                context.getString(R.string.channel_4),
+                context.getString(R.string.channel_8),
+            )
+        }
 
         AlertDialog
-                .Builder(context)
-                .setTitle(context.getString(R.string.select))
-                .setItems(titles) { dialog, which ->
-                    when(which) {
-                        0 -> setTextLayout(1)
-                        1 -> setTextLayout(2)
-                        2 -> setTextLayout(4)
-                        3 -> setTextLayout(8)
+            .Builder(context)
+            .setTitle(context.getString(R.string.select))
+            .setItems(titles) { dialog, which ->
+                when (which) {
+                    0 -> setTextLayout(1)
+                    1 -> setTextLayout(2)
+                    2 -> setTextLayout(4)
+                    3 -> setTextLayout(8)
+                    4 -> setTextLayout(16)
 
-                        else -> {}
+                    else -> {
                     }
+
                 }
-                .setNeutralButton(context.getString(R.string.cancel), null)
-                .show()
+            }
+            .setNeutralButton(context.getString(R.string.cancel), null)
+            .show()
     }
 
     private fun setStartData(isOn: Boolean, fileName: String, path: String = fileUtil.getFilePath()) {
