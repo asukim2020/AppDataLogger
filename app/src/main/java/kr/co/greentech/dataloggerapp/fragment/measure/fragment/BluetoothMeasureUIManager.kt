@@ -374,10 +374,14 @@ object BluetoothMeasureUIManager {
 
         val row = (cellCount / column)
         for (i in 0 until cellCount) {
-            val order = i / row
-            val mod = i % row
-            val index = (mod * column) + order
-            textList.add(copyTestList[index])
+            try {
+                val order = i / row
+                val mod = i % row
+                val index = (mod * column) + order
+                textList.add(copyTestList[index])
+            } catch (e: Exception) {
+                Log.d("Asu", e.localizedMessage)
+            }
         }
     }
 
