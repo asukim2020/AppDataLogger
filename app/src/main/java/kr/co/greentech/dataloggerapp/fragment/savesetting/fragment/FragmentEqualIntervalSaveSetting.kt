@@ -68,6 +68,7 @@ class FragmentEqualIntervalSaveSetting: ListFragment() {
             } else if (i is SpinnerItem) {
                 val measureSpeed = if (i.selectItemPosition == 0) 10.0f else 1.0f
                 PreferenceManager.setFloat(PreferenceKey.MEASURE_SPEED, measureSpeed)
+                item.updateInterval(1L)
             }
         }
     }
