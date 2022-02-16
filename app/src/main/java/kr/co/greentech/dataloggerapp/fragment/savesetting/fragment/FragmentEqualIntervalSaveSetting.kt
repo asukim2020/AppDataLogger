@@ -26,8 +26,8 @@ class FragmentEqualIntervalSaveSetting: ListFragment() {
         super.onActivityCreated(savedInstanceState)
 
         val itemList = ArrayList<String>()
-        itemList.add("10HZ")
-        itemList.add("1HZ")
+        itemList.add("10Hz")
+        itemList.add("1Hz")
 
         val measureSpeed = PreferenceManager.getFloat(PreferenceKey.MEASURE_SPEED)
         val position = if (measureSpeed == 10.0f) 0 else 1
@@ -36,7 +36,7 @@ class FragmentEqualIntervalSaveSetting: ListFragment() {
         list.addAll(
                 listOf(
                     SpinnerItem(
-                        "측정 HZ",
+                        "측정 Hz",
                         position,
                         itemList
                     ),
