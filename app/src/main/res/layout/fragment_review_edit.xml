@@ -12,7 +12,7 @@
         android:id="@+id/btn_copy"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="0">
         <ImageButton
             android:clickable="false"
             android:padding="5dp"
@@ -38,7 +38,7 @@
         android:id="@+id/btn_cut"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="0">
         <ImageButton
             android:clickable="false"
             android:padding="5dp"
@@ -64,7 +64,7 @@
         android:id="@+id/btn_edit"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="33.33">
         <ImageButton
             android:id="@+id/ib_edit"
             android:clickable="false"
@@ -92,7 +92,7 @@
         android:id="@+id/btn_shard"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="33.33">
         <ImageButton
             android:id="@+id/ib_shard"
             android:clickable="false"
@@ -120,7 +120,7 @@
         android:id="@+id/btn_delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20">
+        android:layout_weight="33.33">
         <ImageButton
             android:clickable="false"
             android:padding="5dp"
