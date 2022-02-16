@@ -123,7 +123,7 @@
     <string name="graph_line_type">그래프 선 종류</string>
     <string name="linear">직선</string>
     <string name="cubic_bezier">곡선</string>
-    <string name="step_graph_interval">스텝 그래프 저장 간격</string>
+    <string name="step_graph_interval">스텝 그래프 표시 간격</string>
     <string name="visible_measure_text">측정 시간 표기</string>
     <string name="always_draw">항상 표기</string>
     <string name="draw_save_timing">파일 저장 시 표기</string>
