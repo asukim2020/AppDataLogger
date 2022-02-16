@@ -34,6 +34,7 @@ class ChartUtil(
 
     private val bufferSize = PreferenceManager.getInt(PreferenceKey.GRAPH_BUFFER_SIZE)
     private val graphLineType = PreferenceManager.getInt(PreferenceKey.GRAPH_LINE_TYPE)
+    private val measureSpeed = PreferenceManager.getFloat(PreferenceKey.MEASURE_SPEED)
 
     var isReview: Boolean = false
     private var xScale: CopyGraphScale? = null
@@ -180,7 +181,7 @@ class ChartUtil(
         val x = xScale
         if (x != null) {
             if (x.isOn && !isReview) {
-                chart.setVisibleXRangeMaximum(bufferSize.toFloat() * saveSetting.interval)
+                chart.setVisibleXRangeMaximum(bufferSize.toFloat() * saveSetting.interval / measureSpeed)
             }
         }
     }
